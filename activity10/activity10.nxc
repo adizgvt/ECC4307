@@ -1,0 +1,49 @@
+#define NEAR 30
+
+
+task main()
+{
+int chosenexit=3;
+int counter=0;
+int firstexit=0;
+int secondexit=0;
+int thirdexit=0;
+bool prevhigh=false;
+SetSensorLowspeed(IN_1);
+while(counter<20)
+{
+//---------------------
+counter=counter+1;
+RotateMotor(OUT_AB, 50,212.00);
+if(SensorUS(IN_1)< NEAR)
+{prevhigh=false;
+}
+if(prevhigh==false && SensorUS(IN_1)> NEAR){
+if(SensorUS(IN_1)> NEAR && firstexit==0){
+PlaySound(SOUND_UP);
+Wait(MS_500);
+firstexit=counter;
+}
+if(SensorUS(IN_1)> NEAR && firstexit!=0){
+PlaySound(SOUND_UP);
+Wait(MS_500);
+secondexit=counter;
+}
+if(SensorUS(IN_1)> NEAR && firstexit!=0 && secondexit!=0){
+PlaySound(SOUND_UP);
+Wait(MS_500);
+thirdexit=counter;
+}
+prevhigh=true;
+}
+//---------------------
+}
+Off(OUT_AB);
+if(chosenexit==1){RotateMotor(OUT_AB, 50,-212.00*(19-firstexit));}
+if(chosenexit==2){RotateMotor(OUT_AB, 50,-212.00*(19-secondexit));}
+if(chosenexit==3){RotateMotor(OUT_AB, 50,-212.00*(19-thirdexit));}
+
+RotateMotorEx(OUT_AB, 50, 180, -100, true, true);
+OnFwd(OUT_AB,75);
+Wait(5000);
+}
