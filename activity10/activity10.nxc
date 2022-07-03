@@ -3,7 +3,35 @@
 
 task main()
 {
-int chosenexit=3;
+
+int chosenexit=0;
+
+ClearScreen();
+TextOut(0,LCD_LINE2,"*Exit*");
+
+while(!ButtonPressed(BTNCENTER,1))
+{
+if(ButtonPressed(BTNRIGHT,1))
+{
+ClearScreen();
+TextOut(0,LCD_LINE2,"*Exit*");
+chosenexit=chosenexit+chosenexit;
+Wait(300);
+NumOut(41,LCD_LINE6,chosenexit);
+}
+
+if(ButtonPressed(BTNLEFT,1))
+{
+ClearScreen();
+TextOut(0,LCD_LINE2,"*Chosen Exit*");
+chosenexit=chosenexit-chosenexit;
+Wait(300);
+NumOut(41,LCD_LINE6,chosenexit);
+}
+
+}
+until(!ButtonPressed(BTNCENTER,1));
+
 int counter=0;
 int firstexit=0;
 int secondexit=0;
