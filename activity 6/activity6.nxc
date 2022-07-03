@@ -1,0 +1,47 @@
+#define THRESHOLD 45
+
+task main()
+
+{
+
+ SetSensorLight(IN_1);
+
+ OnFwd(OUT_AB, 90);
+
+ while (true)
+
+ {
+
+ if (Sensor(IN_1) < THRESHOLD)
+
+ {
+
+ Off(OUT_AB);
+ Wait(1000);
+ RotateMotor(OUT_AB, 50,-111.52);
+
+ int direction=Random(3);
+
+ if(direction==0) {
+ RotateMotorEx(OUT_AB, 50, 180, 100, true, true);
+ //90 degree right
+ }
+ if(direction==1) {
+ RotateMotorEx(OUT_AB, 50, 180, 50, true, true);
+ //180 degree right
+ }
+ if(direction==2) {
+ RotateMotorEx(OUT_AB, 50, -180, 100, true, true);
+ //90 degree left
+ }
+ if(direction==3) {
+ RotateMotorEx(OUT_AB, 50, -180, 50, true, true);
+ //180 degree left
+ }
+ }
+  OnFwd(OUT_AB, 90);
+
+ }
+
+
+}
